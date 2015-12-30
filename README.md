@@ -1,9 +1,9 @@
-<h3>This is... Headache! One more very simple Brainfuck interpreter!
+>This is... Headache! One more very simple Brainfuck interpreter!
 by Sidnei Diniz (sidneidiniz@gmail.com) - http://bitworm.com.br
-under MIT License<h3>
+under MIT License
 
-<h4>How to use:
-<center><i>py headache.py [file]</i></center>
+How to use:
+<center>py headache.py [file]</center>
 
 Enjoy! :)
-<h4>
+
