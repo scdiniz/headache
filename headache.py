@@ -35,7 +35,7 @@ class Headache():
 			if cmd == "[":
 				countStart += 1
 			
-			if cmd == "]":
+			elif cmd == "]":
 				countEnd += 1
 				
 		return countStart == countEnd
@@ -81,33 +81,33 @@ class Headache():
 					if self.commands[i] == "<":
 						cell -= 1
 						
-					if self.commands[i] == ">":
+					elif self.commands[i] == ">":
 						cell += 1
 						
-					if self.commands[i] == "+":
+					elif self.commands[i] == "+":
 						if self.cells[cell] < 255:
 							self.cells[cell] += 1
 						else:
 							self.cells[cell] = 0
 						
-					if self.commands[i] == "-":
+					elif self.commands[i] == "-":
 						if self.cells[cell] > 0:
 							self.cells[cell] -= 1
 						else:
 							self.cells[cell] = 255
 						
-					if self.commands[i] == "]":	
+					elif self.commands[i] == "]":	
 						if self.cells[cell] > 0:
 							i = self.loopDict[i]
 						
-					if self.commands[i] == "[":	
+					elif self.commands[i] == "[":	
 						if self.cells[cell] == 0:
 							i = self.loopDict[i]
 						
-					if self.commands[i] == ",":
+					elif self.commands[i] == ",":
 						self.cells[cell] = ord(getch.getch())					
 						
-					if self.commands[i] == ".":
+					elif self.commands[i] == ".":
 						try:
 							print(chr(self.cells[cell]), end = "", flush = True)
 						except:
