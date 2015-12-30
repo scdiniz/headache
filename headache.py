@@ -4,6 +4,7 @@
 # Date: 29-12-2015
 # How to use: py headache.py <file>
 import sys
+import getch # Class to read a key.  http://code.activestate.com/recipes/134892/
 
 # Interpreter kernel
 class Headache():
@@ -101,14 +102,7 @@ class Headache():
 						i = self.loopDict[i]
 					
 				if self.commands[i] == ",":
-					# We are keeping the code portable to any python plataform
-					# using input() function and reading only the first char.
-					# If you don't care about portability, you can improve it
-					# using Getch class from http://code.activestate.com/recipes/134892/
-					try:
-						self.cells[cell] = ord(input()[0])
-					except IndexError:
-						self.cells[cell] = 0
+					self.cells[cell] = ord(getch.getch())					
 					
 				if self.commands[i] == ".":
 					try:
