@@ -121,6 +121,7 @@ class Headache():
 				# Error on loop dictionary
 				print("My head hurts! Verify your loop instructions '[' ']'")
 		else:
+			# Error loading code file
 			print(print("My head hurts! Come on, tell me a VALID brainfuck file name!"))
 
 # Start
