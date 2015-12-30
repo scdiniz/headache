@@ -15,14 +15,19 @@ class Headache():
 	
 	# Load code file
 	def load(self, file):
-		code = open(file, "r")
-		
-		for line in code:
-			for c in line:
-				if c in ("<", ">", "+", "-", ".", ",", "[", "]"):
-					self.commands.append(c)
-		
-		code.close()
+		try:
+			code = open(file, "r")
+			
+			for line in code:
+				for c in line:
+					if c in ("<", ">", "+", "-", ".", ",", "[", "]"):
+						self.commands.append(c)
+			
+			code.close()
+			
+			return True
+		except FileNotFoundError:
+			return False			
 	
 	# Verify loop for errors
 	def validateLoop(self):
@@ -66,54 +71,57 @@ class Headache():
 	
 	# Run interpreter
 	def run(self, file):
-		self.load(file)		
+		# Load code file
+		if self.load(file):
 		
-		# Make loop dictionary
-		if self.setLoopDict():
-			cell = 0
-			i = 0
-			
-			# Execute command by command
-			while i < len(self.commands):								
-				if self.commands[i] == "<":
-					cell -= 1
-					
-				if self.commands[i] == ">":
-					cell += 1
-					
-				if self.commands[i] == "+":
-					if self.cells[cell] < 255:
-						self.cells[cell] += 1
-					else:
-						self.cells[cell] = 0
-					
-				if self.commands[i] == "-":
-					if self.cells[cell] > 0:
-						self.cells[cell] -= 1
-					else:
-						self.cells[cell] = 255
-					
-				if self.commands[i] == "]":	
-					if self.cells[cell] > 0:
-						i = self.loopDict[i]
-					
-				if self.commands[i] == "[":	
-					if self.cells[cell] == 0:
-						i = self.loopDict[i]
-					
-				if self.commands[i] == ",":
-					self.cells[cell] = ord(getch.getch())					
-					
-				if self.commands[i] == ".":
-					try:
-						print(chr(self.cells[cell]), end = "", flush = True)
-					except:
-						None
-					
-				i += 1
+			# Make loop dictionary
+			if self.setLoopDict():
+				cell = 0
+				i = 0
+				
+				# Execute command by command
+				while i < len(self.commands):								
+					if self.commands[i] == "<":
+						cell -= 1
+						
+					if self.commands[i] == ">":
+						cell += 1
+						
+					if self.commands[i] == "+":
+						if self.cells[cell] < 255:
+							self.cells[cell] += 1
+						else:
+							self.cells[cell] = 0
+						
+					if self.commands[i] == "-":
+						if self.cells[cell] > 0:
+							self.cells[cell] -= 1
+						else:
+							self.cells[cell] = 255
+						
+					if self.commands[i] == "]":	
+						if self.cells[cell] > 0:
+							i = self.loopDict[i]
+						
+					if self.commands[i] == "[":	
+						if self.cells[cell] == 0:
+							i = self.loopDict[i]
+						
+					if self.commands[i] == ",":
+						self.cells[cell] = ord(getch.getch())					
+						
+					if self.commands[i] == ".":
+						try:
+							print(chr(self.cells[cell]), end = "", flush = True)
+						except:
+							None
+						
+					i += 1
+			else:
+				# Error on loop dictionary
+				print("My head hurts! Verify your loop instructions '[' ']'")
 		else:
-			# Error on loop dictionary
-			print("My head hurts! Verify your loop instructions '[' ']'")
+			print(print("My head hurts! Come on, tell me a VALID brainfuck file name!"))
 
 # Start
 count = 0
