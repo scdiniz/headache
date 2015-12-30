@@ -1,7 +1,8 @@
-# This is... Headache! One more very simple Brainfuck interpreter! #
-# by Sidnei Diniz - sidneidiniz@gmail.com - http://bitworm.com.br #
+# This is... Headache! One more very simple Brainfuck interpreter!
+# by Sidnei Diniz - sidneidiniz@gmail.com - http://bitworm.com.br
 # GitHub: http://github.com/scdiniz/headache
-# Date: 29-12-2015 #
+# Date: 29-12-2015
+# How to use: py headache.py <file>
 import sys
 
 # Interpreter kernel
@@ -100,7 +101,14 @@ class Headache():
 						i = self.loopDict[i]
 					
 				if self.commands[i] == ",":
-					self.cells[cell] = ord(input()[0])#ord(input()[0])
+					# We are keeping the code portable to any python plataform
+					# using input() function and reading only the first char.
+					# If you don't care about portability, you can improve it
+					# using Getch class from http://code.activestate.com/recipes/134892/
+					try:
+						self.cells[cell] = ord(input()[0])
+					except IndexError:
+						self.cells[cell] = 0
 					
 				if self.commands[i] == ".":
 					try:
