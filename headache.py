@@ -16,14 +16,11 @@ class Headache():
 	# Load code file
 	def load(self, file):
 		try:
-			code = open(file, "r")
-			
-			for line in code:
-				for c in line:
-					if c in ("<", ">", "+", "-", ".", ",", "[", "]"):
-						self.commands.append(c)
-			
-			code.close()
+			with open(file, "r") as code:
+				for line in code:
+					for c in line:
+						if c in ("<", ">", "+", "-", ".", ",", "[", "]"):
+							self.commands.append(c)
 			
 			return True
 		except FileNotFoundError:
@@ -122,17 +119,17 @@ class Headache():
 				print("My head hurts! Verify your loop instructions '[' ']'")
 		else:
 			# Error loading code file
-			print(print("My head hurts! Come on, tell me a VALID brainfuck file name!"))
+			print("My head hurts! Come on, tell me a VALID brainfuck file name!")
 
 # Start
 count = 0
-file = ""
+filename = ""
 
 # Reading sys arguments
 for arg in sys.argv:	
 	count += 1
 	if count == 2:
-		file = arg
+		filename = arg
 		break
 
 # Verify if file name was insert
@@ -140,4 +137,4 @@ if count < 2:
 	print("My head hurts! Come on, tell me brainfuck file name!")
 else:
 	# Launch interpreter
-	Headache().run(file)
+	Headache().run(filename)
